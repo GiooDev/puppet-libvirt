@@ -59,6 +59,13 @@
 #     * network:   libvirt network to attach to (mandatory).
 #     * portgroup: portgroup to attach to (optional).
 #     * type:      Type of network card. Defaults to 'virtio'.
+# [*pcis*]
+#   Array of hashes defining the PCI devices exposed to this domain.
+#   Defaults to no PCI interfaces.
+#   The hashes support the following mandatory keys:
+#     * bus:      PCI bus where the device is connected to (0x00 to 0xff)
+#     * slot:     PCI slot (0x0 to 0x1f)
+#     * function: PCI function (0x0 to 0x7)
 # [*autostart*]
 #   Wheter the libvirt autostart flag should be set. Defaults to true. Autostart
 #   domains are started if the host is booted.
@@ -94,6 +101,7 @@ define libvirt::domain (
   $bootmenu           = true,
   $disks              = [],
   $interfaces         = [],
+  $pcis               = [],
   $autostart          = true,
   $default_host       = undef,
   $evacuation         = undef,
