@@ -74,6 +74,13 @@ disk_src_attrs = {
       <model type='<%= iface.has_key?('type') and iface['type'] or 'virtio' %>'/>
     </interface>
     <% end -%>
+    <% @pcis.each do |pci| -%>
+    <hostdev mode='subsystem' type='pci' managed='yes'>
+      <source>
+        <address domain='0x0000' bus='<%= pci['bus'] %>' slot='<%= pci['slot'] %>' function='<%= pci['function'] %>'/>
+      </source>
+    </hostdev>
+    <% end -%>
   </devices>
 </domain>
 
